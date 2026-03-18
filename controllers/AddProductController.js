@@ -6,7 +6,7 @@ exports.addProduct = async(req, res)=>{
     // res.json('Accepted request')
     console.log(req.file)
 
-    const {nameproduct,price,unit}=req.body
+    const {nameproduct,price,unit,productDescription}=req.body
     const wholsaleMail = req.payload
     // const uploadImage = req.file.filename
 
@@ -19,7 +19,7 @@ const uploadImage = req.file.filename
     const id = req.id
     
 
-    console.log(nameproduct,price,unit,uploadImage,wholsaleMail)
+    console.log(nameproduct,price,unit,productDescription,uploadImage,wholsaleMail)
 
     try {
         const existingProduct = await Products.findOne({nameproduct,wholsaleMail,wholsalerId:id})
@@ -27,7 +27,7 @@ const uploadImage = req.file.filename
         res.status(401).json({message:'Product Already Added '})
 
         }else{
-            const newProducts = new Products({nameproduct,price,unit,uploadImage,wholsaleMail, wholsalerId:id})
+            const newProducts = new Products({nameproduct,price,unit,productDescription,uploadImage,wholsaleMail, wholsalerId:id})
             await newProducts.save()
             res.status(201).json({message:'Product Added successfully',newProducts})
         }
@@ -105,11 +105,12 @@ exports.editProducts = async(req,res)=>{
     
     const {nameproduct,price,unit,uploadImage}=req.body
     const wholsalerId = req.id
-    if (!req.file) {
-  return res.status(400).json({ message: "Image upload failed" })
-}
+        const {id}=req.params
+
+//     if (!req.file) {
+//   return res.status(400).json({ message: "Image upload failed" })
+// }
     const updateImage = req.file?req.file.filename:uploadImage
-    const {id}=req.params
      
 
     try {

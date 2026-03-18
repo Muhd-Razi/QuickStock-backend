@@ -13,6 +13,10 @@ const mongoose = require('mongoose');
         type:String,
         required:true
     },
+    productDescription:{
+        type:String,
+        required:true
+    },
     uploadImage:{
         type:String,
         required:true
