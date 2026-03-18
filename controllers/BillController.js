@@ -1,8 +1,8 @@
 const proBills = require('../models/Billmodel')
-require('dotenv').config()
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-const mongoose = require('mongoose')
-
+// require('dotenv').config()
+console.log("ENV CHECK:", process.env.STRIPE_SECRET_KEY);
+const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.showBill = async(req,res)=>{
     console.log('inside show bill')
