@@ -8,7 +8,14 @@ exports.addProduct = async(req, res)=>{
 
     const {nameproduct,price,unit}=req.body
     const wholsaleMail = req.payload
-    const uploadImage = req.file.filename
+    // const uploadImage = req.file.filename
+
+    if (!req.file) {
+  return res.status(400).json({ message: "Image upload failed" })
+}
+
+const uploadImage = req.file.filename
+
     const id = req.id
     
 
@@ -98,6 +105,9 @@ exports.editProducts = async(req,res)=>{
     
     const {nameproduct,price,unit,uploadImage}=req.body
     const wholsalerId = req.id
+    if (!req.file) {
+  return res.status(400).json({ message: "Image upload failed" })
+}
     const updateImage = req.file?req.file.filename:uploadImage
     const {id}=req.params
      

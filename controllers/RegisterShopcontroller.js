@@ -6,6 +6,9 @@ exports.wholsaleRegister = async(req,res)=>{
     
 
     const {email,password,nameofshop,place,shoptype}=req.body
+    if (!req.file) {
+  return res.status(400).json({ message: "Image upload failed" })
+}
      const shopImage = req.file.filename
     // const shopImage = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
 

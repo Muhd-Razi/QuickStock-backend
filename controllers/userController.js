@@ -120,7 +120,9 @@ exports.updateAdmin = async (req, res) => {
   const { username, password, uploadImg } = req.body
   const email  = req.payload
   const role = req.role
-
+if (!req.file) {
+  return res.status(400).json({ message: "Image upload failed" })
+}
   const updateImage = req.file ? req.file.filename : uploadImg
 
   try {
