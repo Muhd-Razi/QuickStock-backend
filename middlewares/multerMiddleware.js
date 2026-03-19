@@ -5,8 +5,9 @@ const storage = multer.diskStorage({
     callback(null,'./uploads')
   },
   filename:(req,file,callback)=>{
-    const date = new Date().toDateString()
-    const fname = `img - ${file.originalname}-${date}`
+    // const date = new Date().toDateString()
+    // const fname = `img - ${file.originalname}-${date}`
+    const fname = Date.now() + "-" + file.originalname.replace(/\s+/g, '')
 
     callback(null,fname)
   }
